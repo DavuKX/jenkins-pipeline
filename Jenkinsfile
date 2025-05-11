@@ -2,8 +2,9 @@ pipeline {
     agent any
 
     environment {
-        VERCEL_ORG_ID = 'team_9EhzQMuj28UnnaXfcPoss0Pq'
-        VERCEL_PROJECT_ID = 'prj_R1EhLYkMbpit67rCbKujwB0mHN3k'
+        VERCEL_ORG_ID = credentials('vercel-org-id')
+        VERCEL_PROJECT_ID = credentials('vercel-project-id')
+        VERCEL_TOKEN = credentials('vercel-token')
     }
 
     stages {
@@ -15,12 +16,10 @@ pipeline {
 
         stage('Deploy to Vercel') {
             steps {
-                withCredentials([string(credentialsId: 'vercel-token', variable: 'VERCEL_TOKEN')]) {
-                    sh '''
-                        vercel pull --yes --token=$VERCEL_TOKEN
-                        vercel --prod --token=$VERCEL_TOKEN
-                    '''
-                }
+                sh '''
+                    vercel pull --yes --token=$VERCEL_TOKEN
+                    vercel --prod --token=$VERCEL_TOKEN
+                '''
             }
         }
     }
