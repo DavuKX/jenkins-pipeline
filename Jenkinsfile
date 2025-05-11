@@ -13,12 +13,6 @@ pipeline {
             }
         }
 
-        stage('Install Vercel CLI') {
-            steps {
-                sh 'npm install -g vercel'
-            }
-        }
-
         stage('Deploy to Vercel') {
             steps {
                 withCredentials([string(credentialsId: 'vercel-token', variable: 'VERCEL_TOKEN')]) {

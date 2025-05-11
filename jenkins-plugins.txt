@@ -1,0 +1,9 @@
+git
+workflow-aggregator
+credentials
+nodejs
+workflow-cps
+workflow-job
+pipeline-stage-view
+ansicolor
+ws-cleanup
