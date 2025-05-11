@@ -1,34 +1,29 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs "Node 18"
-    }
-
     environment {
-        VERCEL_TOKEN = credentials('vercel-token')
+        VERCEL_TOKEN = credentials('vercel-token') 
+        VERCEL_ORG_ID = 'your-org-id'              
+        VERCEL_PROJECT_ID = 'your-project-id'      
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/DavuKX/jenkins-pipeline.git'
+                git url: 'https://github.com/your/repo.git', branch: 'main'
             }
         }
-        stage('Install dependencies') {
+
+        stage('Install Vercel CLI') {
             steps {
-                sh 'npm install'
+                sh 'npm install -g vercel'
             }
         }
-        stage('Build') {
-            steps {
-                sh 'npm run build'
-            }
-        }
+
         stage('Deploy to Vercel') {
             steps {
                 sh '''
-                    npm install -g vercel
+                    vercel pull --yes --token=$VERCEL_TOKEN
                     vercel --prod --token=$VERCEL_TOKEN
                 '''
             }
