@@ -6,7 +6,7 @@ export default function Home() {
           Welcome to My Project
         </h1>
         <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300">
-          This is a simple landing page to demonstrate CI/CD deployment using Jenkins.
+          This is a simple  page to demonstrate CI/CD deployment using Jenkins.
         </p>
       </main>
 
